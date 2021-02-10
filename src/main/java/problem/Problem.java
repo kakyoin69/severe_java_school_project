@@ -3,6 +3,7 @@ package problem;
 import javax.media.opengl.GL2;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -46,7 +47,7 @@ public class Problem {
      * @param setVal номер множества
      */
     public void addPoint(double x, double y, int setVal) {
-        Point point = new Point(x, y, setVal);
+        Point point = new Point(x, y);
         points.add(point);
     }
 
@@ -83,7 +84,7 @@ public class Problem {
                 double y = sc.nextDouble();
                 int setVal = sc.nextInt();
                 sc.nextLine();
-                Point point = new Point(x, y, setVal);
+                Point point = new Point(x, y);
                 points.add(point);
             }
         } catch (Exception ex) {
@@ -98,7 +99,7 @@ public class Problem {
         try {
             PrintWriter out = new PrintWriter(new FileWriter(FILE_NAME));
             for (Point point : points) {
-                out.printf("%.2f %.2f %d\n", point.x, point.y, point.setNumber);
+                out.printf("%.2f %.2f %d\n", point.x, point.y);
             }
             out.close();
         } catch (IOException ex) {
@@ -131,8 +132,28 @@ public class Problem {
      * @param gl переменная OpenGL для рисования
      */
     public void render(GL2 gl) {
-        for (Point point : points) {
-            point.render(gl);
-        }
+
+        //данные для дебага
+        Point p = new Point(3, 5);
+        Point LEFTX = new Point(-20, 0),
+                RIGHTX = new Point(20, 0),
+                UPY = new Point(0, 20),
+                DOWNY = new Point(0, -20);
+
+        Random rnd = new Random();
+
+        Point p1 = new Point(rnd.nextInt(41)-20, rnd.nextInt(41)-20);
+        Point p2 = new Point(rnd.nextInt(41)-20, rnd.nextInt(41)-20);
+        Point p3 = new Point(rnd.nextInt(41)-20, rnd.nextInt(41)-20);
+        Color coolColor = new Color(255, 255, 255);
+        boolean filled = true;
+        //данные для дебага
+
+        Figures.renderPoint(gl, p, 6, coolColor);
+
+        Figures.renderLine(gl, LEFTX, RIGHTX, 2, coolColor);
+        Figures.renderLine(gl, UPY, DOWNY, 2, coolColor);
+
+        Figures.renderTriangle(gl, p1, p2, p3, coolColor.change(-100), filled);
     }
 }
