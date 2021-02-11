@@ -6,6 +6,7 @@ import static javax.media.opengl.GL.*;
 
 public class Figures{
 
+    public static final double decartSize = 20;
 
     public static void renderPoint(GL2 gl, Point p, double W, Color color){
         double
@@ -14,7 +15,7 @@ public class Figures{
                 b=color.B/255;
         gl.glColor3d(r,g,b); //делаем цвет
 
-        double x = p.x/20, y = p.y/20; //делаем нормальные координаты (20 максимум)
+        double x = p.x/decartSize, y = p.y/decartSize; //делаем нормальные координаты
 
 
         gl.glPointSize((float) W);
@@ -30,9 +31,9 @@ public class Figures{
                 b=color.B/255;
         gl.glColor3d(r,g,b); //делаем цвет
 
-        double x1 = p1.x/20, y1 = p1.y/20;
-        double x2 = p2.x/20, y2 = p2.y/20;
-        //делаем нормальные координаты (20 максимум)
+        double x1 = p1.x/decartSize, y1 = p1.y/decartSize;
+        double x2 = p2.x/decartSize, y2 = p2.y/decartSize;
+        //делаем нормальные координаты
 
 
         gl.glLineWidth((float) W);
@@ -49,10 +50,10 @@ public class Figures{
                 b=color.B/255;
         gl.glColor3d(r,g,b); //делаем цвет
 
-        double x1 = p1.x/20, y1 = p1.y/20;
-        double x2 = p2.x/20, y2 = p2.y/20;
-        double x3 = p3.x/20, y3 = p3.y/20;
-        //делаем нормальные координаты (20 максимум)
+        double x1 = p1.x/decartSize, y1 = p1.y/decartSize;
+        double x2 = p2.x/decartSize, y2 = p2.y/decartSize;
+        double x3 = p3.x/decartSize, y3 = p3.y/decartSize;
+        //делаем нормальные координаты
         if(!filled){
         gl.glBegin(GL_LINE_STRIP);
         gl.glVertex2d(x1,y1);
@@ -68,4 +69,60 @@ public class Figures{
             gl.glEnd();
         }
     }
+
+    public static void renderQuad(GL2 gl, Point p1, Point p2, Point p3, Point p4, Color color, boolean filled){
+        double
+                r=color.R/255,
+                g=color.G/255,
+                b=color.B/255;
+        gl.glColor3d(r,g,b); //делаем цвет
+
+        double x1 = p1.x/decartSize, y1 = p1.y/decartSize;
+        double x2 = p2.x/decartSize, y2 = p2.y/decartSize;
+        double x3 = p3.x/decartSize, y3 = p3.y/decartSize;
+        double x4 = p4.x/decartSize, y4 = p4.y/decartSize;
+        //делаем нормальные координаты
+        if(!filled){
+            gl.glBegin(GL_LINE_STRIP);
+            gl.glVertex2d(x1,y1);
+            gl.glVertex2d(x2,y2);
+            gl.glVertex2d(x3,y3);
+            gl.glVertex2d(x4,y4);
+            gl.glVertex2d(x1,y1);
+            gl.glEnd();}
+        else{
+            gl.glBegin(GL_TRIANGLE_FAN);
+            gl.glVertex2d(x1,y1);
+            gl.glVertex2d(x2,y2);
+            gl.glVertex2d(x3,y3);
+            gl.glVertex2d(x4,y4);
+            gl.glEnd();
+        }
+    }
+
+    public static void renderCircle(GL2 gl, Point p, double R, Color color, boolean filled){
+        double
+                r=color.R/255,
+                g=color.G/255,
+                b=color.B/255;
+        gl.glColor3d(r,g,b); //делаем цвет
+
+        double x0 = p.x/decartSize, y0 = p.y/decartSize;
+        //делаем нормальные координаты
+
+        gl.glBegin(GL_LINE_STRIP);
+
+        double delta = 10; //шаг прорисовки окружности
+        for (int i = 0; i <= delta; i++) {
+            double alpha = Math.toRadians(i*(360 / delta));
+
+            double x = x0 + R * Math.cos(alpha);
+            double y = y0 + R * Math.sin(alpha);
+            gl.glVertex2d(x,y);
+        }
+        gl.glEnd();
+
+
+    }
+
 }

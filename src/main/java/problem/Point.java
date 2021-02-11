@@ -8,7 +8,6 @@ import java.util.Random;
  * Класс точки
  */
 public class Point {
-    boolean isSolution = false;
     /**
      * x - координата точки
      */
@@ -28,19 +27,6 @@ public class Point {
     Point(double x, double y) {
         this.x = x;
         this.y = y;
-    }
-
-    /**
-     * Получить случайную точку
-     *
-     * @return случайная точка
-     */
-    static Point getRandomPoint() {
-        Random r = new Random();
-        double nx = (double) r.nextInt(50) / 25 - 1;
-        double ny = (double) r.nextInt(50) / 25 - 1;
-        int nSetVal = r.nextInt(2);
-        return new Point(nx, ny);
     }
 
     /**

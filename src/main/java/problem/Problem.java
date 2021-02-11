@@ -15,12 +15,16 @@ public class Problem {
      */
     public static final String PROBLEM_TEXT = "ПОСТАНОВКА ЗАДАЧИ:\n" +
             "Задано множество окружностей и множество прямоугольников.\n" +
-            "Требуется построить пересечения и разность этих множеств";
+            "Найти такую пару прямоугольник-окружность, что фигура, \n" +
+            "находящаяся внутри прямоугольника и окружности, \n" +
+            "имеет максимальную площадь. Выделить найденные \n" +
+            "прямоугольник и окружность, контур фигуры и \n" +
+            "внутреннее пространство фигуры.\n";
 
     /**
      * заголовок окна
      */
-    public static final String PROBLEM_CAPTION = "Итоговый проект ученика 10-7 Борисенко Николая";
+    public static final String PROBLEM_CAPTION = "ИТОГОВЫЙ ПРОЕКТ УЧЕНИКА 10-7 БОРИСЕНКО НИКОЛАЯ";
 
     /**
      * путь к файлу
@@ -44,7 +48,6 @@ public class Problem {
      *
      * @param x      координата X точки
      * @param y      координата Y точки
-     * @param setVal номер множества
      */
     public void addPoint(double x, double y, int setVal) {
         Point point = new Point(x, y);
@@ -55,19 +58,7 @@ public class Problem {
      * Решить задачу
      */
     public void solve() {
-        // перебираем пары точек
-        for (Point p : points) {
-            for (Point p2 : points) {
-                // если точки являются разными
-                if (p != p2) {
-                    // если координаты у них совпадают
-                    if (Math.abs(p.x - p2.x) < 0.0001 && Math.abs(p.y - p2.y) < 0.0001) {
-                        p.isSolution = true;
-                        p2.isSolution = true;
-                    }
-                }
-            }
-        }
+        //тут будет решение
     }
 
     /**
@@ -108,18 +99,6 @@ public class Problem {
     }
 
     /**
-     * Добавить заданное число случайных точек
-     *
-     * @param n кол-во точек
-     */
-    public void addRandomPoints(int n) {
-        for (int i = 0; i < n; i++) {
-            Point p = Point.getRandomPoint();
-            points.add(p);
-        }
-    }
-
-    /**
      * Очистить задачу
      */
     public void clear() {
@@ -142,18 +121,25 @@ public class Problem {
 
         Random rnd = new Random();
 
-        Point p1 = new Point(rnd.nextInt(41)-20, rnd.nextInt(41)-20);
-        Point p2 = new Point(rnd.nextInt(41)-20, rnd.nextInt(41)-20);
-        Point p3 = new Point(rnd.nextInt(41)-20, rnd.nextInt(41)-20);
-        Color coolColor = new Color(255, 255, 255);
-        boolean filled = true;
+        double d = Figures.decartSize;
+
+        Point p1 = new Point(5, 6);
+        Point p2 = new Point(7, 2);
+        Point p3 = new Point(7, 7);
+        Color coolColor = new Color(255, 0, 255);
+        boolean filled = false;
         //данные для дебага
 
-        Figures.renderPoint(gl, p, 6, coolColor);
+        //координатные оси
+        Figures.renderLine(gl, LEFTX, RIGHTX, 2, new Color(255,255,255));
+        Figures.renderLine(gl, UPY, DOWNY, 2, new Color(255,255,255));
+        Figures.renderTriangle(gl, new Point(19,1), new Point(20,0), new Point(19,-1),new Color(255,255,255),true);
+        Figures.renderTriangle(gl, new Point(1,19), new Point(0,20), new Point(-1,19), new Color(255,255,255),true);
 
-        Figures.renderLine(gl, LEFTX, RIGHTX, 2, coolColor);
-        Figures.renderLine(gl, UPY, DOWNY, 2, coolColor);
-
-        Figures.renderTriangle(gl, p1, p2, p3, coolColor.change(-100), filled);
+        //тесты
+        Figures.renderPoint(gl, new Point(-18,-5),3,coolColor);
+        Figures.renderTriangle(gl, p1, p2, p3, coolColor, filled);
+        Figures.renderQuad(gl,new Point(-10,-10), new Point(-10,10), new Point(-5,10), new Point(-5,-10), coolColor, false);
+        Figures.renderCircle(gl, new Point(0,0),5,coolColor,false);
     }
 }

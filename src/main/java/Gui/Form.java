@@ -93,12 +93,7 @@ public class Form extends JFrame {
                // renderer.problem.addPoint(x, y);
             }
         });
-        randomBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                renderer.problem.addRandomPoints(Integer.parseInt(pointCntField.getText()));
-            }
-        });
+
         loadFromFileBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
