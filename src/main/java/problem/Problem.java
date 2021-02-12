@@ -140,6 +140,6 @@ public class Problem {
         Figures.renderPoint(gl, new Point(-18,-5),3,coolColor);
         Figures.renderTriangle(gl, p1, p2, p3, coolColor, filled);
         Figures.renderQuad(gl,new Point(-10,-10), new Point(-10,10), new Point(-5,10), new Point(-5,-10), coolColor, false);
-        Figures.renderCircle(gl, new Point(0,0),5,coolColor,false);
+        Figures.renderCircle(gl, new Point(0,0),5,coolColor,true);
     }
 }

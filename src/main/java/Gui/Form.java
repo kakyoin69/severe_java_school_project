@@ -49,6 +49,10 @@ public class Form extends JFrame {
         GLPlaceholder.add(renderer.getCanvas());
         // указываем главный элемент формы
         getContentPane().add(root);
+//        Dimension d = getPreferredSize();
+//        d.height = d.width;
+//        // задаём размер формы
+//        setSize(d);
         // задаём размер формы
         setSize(getPreferredSize());
         // показываем форму
@@ -90,7 +94,7 @@ public class Form extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 double x = Double.parseDouble(xPointField.getText());
                 double y = Double.parseDouble(yPointField.getText());
-               // renderer.problem.addPoint(x, y);
+                // renderer.problem.addPoint(x, y);
             }
         });
 

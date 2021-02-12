@@ -107,20 +107,36 @@ public class Figures{
                 b=color.B/255;
         gl.glColor3d(r,g,b); //делаем цвет
 
+        double radius = R/decartSize; //выровняем радиус
+
         double x0 = p.x/decartSize, y0 = p.y/decartSize;
         //делаем нормальные координаты
 
+        double delta = 30; //шаг прорисовки окружности
+        if(!filled){
         gl.glBegin(GL_LINE_STRIP);
 
-        double delta = 10; //шаг прорисовки окружности
+
         for (int i = 0; i <= delta; i++) {
             double alpha = Math.toRadians(i*(360 / delta));
 
-            double x = x0 + R * Math.cos(alpha);
-            double y = y0 + R * Math.sin(alpha);
+            double x = x0 + radius * Math.cos(alpha);
+            double y = y0 + radius * Math.sin(alpha);
             gl.glVertex2d(x,y);
         }
-        gl.glEnd();
+        gl.glEnd();}else{
+            gl.glBegin(GL_TRIANGLE_FAN);
+
+            gl.glVertex2d(x0,y0);
+            for (int i = 0; i <= delta; i++) {
+                double alpha = Math.toRadians(i*(360 / delta));
+
+                double x = x0 + radius * Math.cos(alpha);
+                double y = y0 + radius * Math.sin(alpha);
+                gl.glVertex2d(x,y);
+            }
+            gl.glEnd();
+        }
 
 
     }
