@@ -54,16 +54,12 @@ public class Problem {
         points.add(point);
     }
 
-    /**
-     * Решить задачу
-     */
+    //Решить задачу
     public void solve() {
         //тут будет решение
     }
 
-    /**
-     * Загрузить задачу из файла
-     */
+    //Загрузить задачу из файла
     public void loadFromFile() {
         points.clear();
         try {
@@ -83,9 +79,8 @@ public class Problem {
         }
     }
 
-    /**
-     * Сохранить задачу в файл
-     */
+
+    //Сохранить задачу в файл
     public void saveToFile() {
         try {
             PrintWriter out = new PrintWriter(new FileWriter(FILE_NAME));
@@ -98,48 +93,30 @@ public class Problem {
         }
     }
 
-    /**
-     * Очистить задачу
-     */
+    //Очистить задачу
     public void clear() {
         points.clear();
     }
 
-    /**
-     * Нарисовать задачу
-     *
-     * @param gl переменная OpenGL для рисования
-     */
     public void render(GL2 gl) {
 
         //данные для дебага
         Point p = new Point(3, 5);
+        Point p1 = new Point(5, 6);
+
+        //нарисовать координатные оси
         Point LEFTX = new Point(-20, 0),
                 RIGHTX = new Point(20, 0),
                 UPY = new Point(0, 20),
                 DOWNY = new Point(0, -20);
-
-        Random rnd = new Random();
-
-        double d = Figures.decartSize;
-
-        Point p1 = new Point(5, 6);
-        Point p2 = new Point(7, 2);
-        Point p3 = new Point(7, 7);
-        Color coolColor = new Color(255, 0, 255);
-        boolean filled = false;
-        //данные для дебага
-
-        //координатные оси
         Figures.renderLine(gl, LEFTX, RIGHTX, 2, new Color(255,255,255));
         Figures.renderLine(gl, UPY, DOWNY, 2, new Color(255,255,255));
         Figures.renderTriangle(gl, new Point(19,1), new Point(20,0), new Point(19,-1),new Color(255,255,255),true);
         Figures.renderTriangle(gl, new Point(1,19), new Point(0,20), new Point(-1,19), new Color(255,255,255),true);
+        //нарисовать координатные оси
 
-        //тесты
-        Figures.renderPoint(gl, new Point(-18,-5),3,coolColor);
-        Figures.renderTriangle(gl, p1, p2, p3, coolColor, filled);
-        Figures.renderQuad(gl,new Point(-10,-10), new Point(-10,10), new Point(-5,10), new Point(-5,-10), coolColor, false);
-        Figures.renderCircle(gl, new Point(0,0),5,coolColor,true);
+        Quad q = new Quad(new Point(1,2), new Point(5,6), new Point(3,1));
+        q.render(gl, new Color(255,255,255),false);
+
     }
 }

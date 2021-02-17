@@ -2,19 +2,14 @@ package problem;
 
 import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
-import java.util.Random;
 
 /**
  * Класс точки
  */
 public class Point {
-    /**
-     * x - координата точки
-     */
+    //x - координата точки
     double x;
-    /**
-     * y - координата точки
-     */
+    //y - координата точки
     double y;
 
     /**
@@ -29,26 +24,19 @@ public class Point {
         this.y = y;
     }
 
-    /**
-     * Рисование точки
-     *
-     * @param gl переменная OpenGl для рисования
-     */
-    void render(GL2 gl) {
-        gl.glPointSize(3);
-        gl.glBegin(GL.GL_POINTS);
-        gl.glVertex2d(x, y);
-        gl.glEnd();
-        gl.glPointSize(1);
+    public double distanceTo(Point point) {
+        double d = Math.sqrt((x - point.x) * (x - point.x) + (y - point.y) * (y - point.y));
+        return d;
     }
 
-    /**
-     * Получить строковое представление точки
-     *
-     * @return строковое представление точки
-     */
+    //Рисование точки через класс Figures
+    void render(GL2 gl, double W, Color color) {
+        Figures.renderPoint(gl,this, W, color);
+    }
+
+    //Получить строковое представление точки
     @Override
     public String toString() {
-        return "Точка с координатами: {" + x + "," + y + "} из множества: ";
+        return "Точка с координатами: {" + x + "," + y + "}";
     }
 }

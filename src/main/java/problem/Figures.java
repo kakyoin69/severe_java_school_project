@@ -112,7 +112,7 @@ public class Figures{
         double x0 = p.x/decartSize, y0 = p.y/decartSize;
         //делаем нормальные координаты
 
-        double delta = 30; //шаг прорисовки окружности
+        double delta = 50; //шаг прорисовки окружности
         if(!filled){
         gl.glBegin(GL_LINE_STRIP);
 
