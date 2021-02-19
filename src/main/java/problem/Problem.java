@@ -56,7 +56,7 @@ public class Problem {
 
     //Решить задачу
     public void solve() {
-        //тут будет решение
+        //
     }
 
     //Загрузить задачу из файла
@@ -115,8 +115,10 @@ public class Problem {
         Figures.renderTriangle(gl, new Point(1,19), new Point(0,20), new Point(-1,19), new Color(255,255,255),true);
         //нарисовать координатные оси
 
-        Quad q = new Quad(new Point(1,2), new Point(5,6), new Point(3,1));
-        q.render(gl, new Color(255,255,255),false);
+        Quad q = new Quad(new Point(5,3), new Point(10,15), new Point(-8,14));
+        q.render(gl, new Color(89, 2.2,0),true);
 
+        Circle c = new Circle(new Point(5,3),new Point(-8,14));
+        c.render(gl,new Color(255, 100,0),false);
     }
 }
