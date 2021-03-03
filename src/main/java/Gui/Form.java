@@ -1,11 +1,3 @@
-package Gui;
-
-import problem.Point;
-import problem.Problem;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
 
 /**
  * Класс формы приложения
@@ -134,9 +126,5 @@ public class Form extends JFrame {
     /**
      * Главный метод
      *
-     * @param args аргументы командной строки
-     */
-    public static void main(String[] args) {
-        new Form();
     }
 }
