@@ -9,6 +9,9 @@ public class Quad {
     //длины сторон
     double a,b;
 
+    //прямые, задающие прямоугольник
+    Line line1, line2, line3, line4;
+
 
     Quad(Point p1, Point p2, Point pA) {
         this.p1 = p1;
@@ -25,6 +28,36 @@ public class Quad {
 
         p3 = line_parallel.intersection(line_perped2);
         p4 = line_parallel.intersection(line_perped1);
+
+        line1 = new Line(p1,p2);
+        line2 = new Line(p2,p3);
+        line3 = new Line(p3,p4);
+        line4 = new Line(p4,p1);
+    }
+
+    public boolean isInside(Point p){
+        Line lineUp1, lineDown1, lineUp2, lineDown2;
+        double x = p.x, y = p.y;
+        if(line3.b>line1.b){
+            lineUp1 = line3;
+            lineDown1 = line1;
+        }else{
+            lineUp1 = line1;
+            lineDown1 = line3;
+        }
+
+        if(line4.b>line2.b){
+            lineUp2 = line4;
+            lineDown2 = line2;
+        }else{
+            lineUp2 = line2;
+            lineDown2 = line4;
+        }
+
+        return p.compareTo(lineDown1) > 0 && p.compareTo(lineDown2) > 0 && p.compareTo(lineUp1) < 0 && p.compareTo(lineUp2) < 0;
+
+
+
     }
 
     //Рисование точки через класс Figures

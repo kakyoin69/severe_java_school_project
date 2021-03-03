@@ -1,18 +1,33 @@
 package problem;
 
 public class Line {
+    public double k,b;
     private double A, B, C;
 
+    //представление прямой в виде Ax + By + C = 0
     public Line(Point p1, Point p2) {
         A = p1.y - p2.y;
         B = p2.x - p1.x;
         C = p1.x * p2.y - p2.x * p1.y;
+        k = -A/B;
+        b = -C/B;
     }
 
     public Line(double a, double b, double c) {
         A = a;
         B = b;
         C = c;
+        k = -A/B;
+        b = -C/B;
+    }
+
+    //представление прямой в виде y = kx+b
+    public Line (double k, double b){
+        this.k=k;
+        this.b=b;
+        this.A = -k;
+        this.B = 1;
+        this.C = -b;
     }
 
     public double distanceToZero() {
@@ -85,26 +100,6 @@ public class Line {
         }
     }
 
-    public double projectionLength(Point p1, Point p2) {
-        Point P1 = nearPoint(p1);
-        Point P2 = nearPoint(p2);
-        return P1.distanceTo(P2);
-    }
-
-    public Point middlePoint(Point p1) {
-        Point p2 = nearPoint(p1);
-        double X = (p2.x + p1.x) / 2;
-        double Y = (p2.y + p1.y) / 2;
-        return new Point(X, Y);
-    }
-
-    public Point symmetricPoint(Point p1) {
-        Point p0 = nearPoint(p1);
-        double
-                dx = p0.x - p1.x,
-                dy = p0.y - p1.y;
-        return new Point(p0.x + dx, p0.y + dy);
-    }
 
     public int whatIsSquare(Point p) {
         if (p.x > 0 && p.y > 0) return 1;
@@ -145,6 +140,8 @@ public class Line {
         }
         return false;
     }
+
+
 
     public void normalize() {
         if (C != 0) {

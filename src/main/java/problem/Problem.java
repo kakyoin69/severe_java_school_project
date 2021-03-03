@@ -101,9 +101,10 @@ public class Problem {
     public void render(GL2 gl) {
 
         //данные для дебага
-        Point p = new Point(3, 5);
-        Point p1 = new Point(5, 6);
+        Point p = new Point(3.1, 4);
+        Point p1 = new Point(6, 3);
 
+        Color white = new Color(255,255,255);
         //нарисовать координатные оси
         Point LEFTX = new Point(-20, 0),
                 RIGHTX = new Point(20, 0),
@@ -115,10 +116,16 @@ public class Problem {
         Figures.renderTriangle(gl, new Point(1,19), new Point(0,20), new Point(-1,19), new Color(255,255,255),true);
         //нарисовать координатные оси
 
-        Quad q = new Quad(new Point(5,3), new Point(10,15), new Point(-8,14));
-        q.render(gl, new Color(89, 2.2,0),true);
+        Quad q = new Quad(new Point(3,4), new Point(5,-2), new Point(9,7));
+        q.render(gl,white,false);
 
         Circle c = new Circle(new Point(5,3),new Point(-8,14));
         c.render(gl,new Color(255, 100,0),false);
+
+        p1.render(gl,2, white);
+        p.render(gl,2,white);
+
+        System.out.println(q.isInside(p));
+        System.out.println(q.isInside(p1));
     }
 }

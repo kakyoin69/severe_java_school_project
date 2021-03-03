@@ -2,11 +2,12 @@ package problem;
 
 import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
+import java.util.Objects;
 
 /**
  * Класс точки
  */
-public class Point {
+public class Point implements Comparable<Line> {
     //x - координата точки
     double x;
     //y - координата точки
@@ -25,7 +26,8 @@ public class Point {
     }
 
     public double distanceTo(Point point) {
-        double d = Math.sqrt((x - point.x) * (x - point.x) + (y - point.y) * (y - point.y));
+        double d;
+        d = Math.sqrt((x - point.x) * (x - point.x) + (y - point.y) * (y - point.y));
         return d;
     }
 
@@ -38,5 +40,24 @@ public class Point {
     @Override
     public String toString() {
         return "Точка с координатами: {" + x + "," + y + "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Point point = (Point) o;
+        return Double.compare(point.x, x) == 0 && Double.compare(point.y, y) == 0;
+    }
+
+    //1 - точка выше прямой
+    //0 - точка на прямой, принадлежит
+    //-1 - точка ниже прямой
+    @Override
+    public int compareTo(Line line) {
+        if(y>line.k*x + line.b) return 1;
+        if(y==line.k*x + line.b) return 0;
+        if(y<line.k*x + line.b) return -1;
+        return 0;
     }
 }
